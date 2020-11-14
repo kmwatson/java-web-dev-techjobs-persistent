@@ -9,6 +9,12 @@ public class Employer extends AbstractEntity {
     @NotBlank
     public String location;
 
+    public Employer(@NotBlank String location) {
+        this.location = location;
+    }
+
+    public Employer() {};
+
     public String getLocation() {
         return location;
     }
@@ -17,9 +23,4 @@ public class Employer extends AbstractEntity {
         this.location = location;
     }
 
-    public Employer() {};
-
-    public Employer(@NotBlank String location) {
-        this.location = location;
-    }
 }
