@@ -1,6 +1,8 @@
 package org.launchcode.javawebdevtechjobspersistent.controllers;
 
+import org.launchcode.javawebdevtechjobspersistent.models.Employer;
 import org.launchcode.javawebdevtechjobspersistent.models.Job;
+import org.launchcode.javawebdevtechjobspersistent.models.Skill;
 import org.launchcode.javawebdevtechjobspersistent.models.data.EmployerRepository;
 import org.launchcode.javawebdevtechjobspersistent.models.data.JobRepository;
 import org.launchcode.javawebdevtechjobspersistent.models.data.SkillRepository;
@@ -29,6 +31,11 @@ public class HomeController {
     @Autowired
     public JobRepository jobRepository;
 
+    //Optional<Employer> employer = employerRepository.findById(employerId);
+
+    //List<Skill> skillObjs = (List<Skill>) skillRepository.findAllById(skills);
+        //newJob.setSkills(skillObjs);
+
     @RequestMapping("")
     public String index(Model model) {
 
@@ -55,8 +62,19 @@ public class HomeController {
         if (errors.hasErrors()) {
             model.addAttribute("title", "Add Job");
             return "add";
+        } else {
+            Optional<Employer> optionalEmployer = employerRepository.findById(employerId);
+            Employer employer = optionalEmployer.get();
+            newJob.setEmployer(employer);
+
+            List<Skill> skillObjs = (List<Skill>) skillRepository.findAllById(skills);
+            newJob.setSkills(skillObjs);
+
+            jobRepository.save(newJob);
+
+            model.addAttribute("job", jobRepository.findAll());
         }
-        jobRepository.save(newJob);
+
         return "redirect:";
 
     }
@@ -68,10 +86,11 @@ public class HomeController {
         if (!optJob.isEmpty()) {
             Job job = (Job) optJob.get();
             model.addAttribute("job", job);
-            return "job/view";
+            return "view";
         } else {
             return "view";
         }
     }
+
 
 }
