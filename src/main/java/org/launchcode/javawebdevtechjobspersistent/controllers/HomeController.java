@@ -59,7 +59,7 @@ public class HomeController {
                                     @RequestParam int employerId,
                                     @RequestParam List<Integer> skills) {
 
-        if (errors.hasErrors()) {
+        if (errors.hasErrors() || skills.isEmpty()) {
             model.addAttribute("title", "Add Job");
             return "add";
         } else {
@@ -72,7 +72,7 @@ public class HomeController {
 
             jobRepository.save(newJob);
 
-            model.addAttribute("job", jobRepository.findAll());
+            //model.addAttribute("job", jobRepository.findAll());
         }
 
         return "redirect:";

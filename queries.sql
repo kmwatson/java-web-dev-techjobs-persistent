@@ -5,6 +5,9 @@ name VARCHAR
 skills VARCHAR
 
 ## Part 2: Test it with SQL
+SELECT *
+FROM jobs
+WHERE location
 
 ## Part 3: Test it with SQL
 DROP TABLE 'techjobs'.'jobs'
