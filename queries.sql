@@ -13,3 +13,7 @@ WHERE location
 DROP TABLE 'techjobs'.'jobs'
 
 ## Part 4: Test it with SQL
+SELECT name, description
+FROM skill
+INNER JOIN job ON skill.id = job_skills.id
+ORDER BY name ASC
