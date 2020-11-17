@@ -1,7 +1,6 @@
 package org.launchcode.javawebdevtechjobspersistent.models;
 
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotBlank;
 import java.util.ArrayList;
@@ -14,7 +13,6 @@ public class Employer extends AbstractEntity {
     public String location;
 
     @OneToMany(mappedBy = "employer")
-    @JoinColumn
     private final List<Job> jobs = new ArrayList<>();
 
     public Employer(@NotBlank String location) {
